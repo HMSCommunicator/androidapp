@@ -1,0 +1,58 @@
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/outdoor_dest"
+    class="com.huawei.hms.maps.MapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    map:cameraTargetLat="48.893478"
+    map:cameraTargetLng="2.334595"
+    map:cameraZoom="10" />
+<!--    tools:context=".OutdoorFragment" />-->
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+&lt;!&ndash;<fragment xmlns:android="http://schemas.android.com/apk/res/android"&ndash;&gt;
+&lt;!&ndash;    xmlns:tools="http://schemas.android.com/tools"&ndash;&gt;
+&lt;!&ndash;    android:id="@+id/map"&ndash;&gt;
+
+&lt;!&ndash;    android:name="android:name="com.huawei.hms.maps.SupportMapFragment"&ndash;&gt;
+&lt;!&ndash;    android:layout_width="match_parent"&ndash;&gt;
+&lt;!&ndash;    android:layout_height="match_parent"&ndash;&gt;
+&lt;!&ndash;    tools:context=".OutdoorFragment" />&ndash;&gt;
+
+<?xml version="1.0" encoding="utf-8"?>
+&lt;!&ndash;<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"&ndash;&gt;
+&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
+&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;
+&lt;!&ndash;android:orientation="vertical">&ndash;&gt;
+
+&lt;!&ndash;<androidx.constraintlayout.widget.ConstraintLayout&ndash;&gt;
+&lt;!&ndash;        xmlns:android="http://schemas.android.com/apk/res/android"&ndash;&gt;
+&lt;!&ndash;        xmlns:app="http://schemas.android.com/apk/res-auto"&ndash;&gt;
+&lt;!&ndash;        xmlns:tools="http://schemas.android.com/tools"&ndash;&gt;
+&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;
+&lt;!&ndash;        android:layout_height="match_parent"&ndash;&gt;
+&lt;!&ndash;        tools:context=".SettingsFragment">&ndash;&gt;
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+
+&lt;!&ndash;        android:name="android:name="com.huawei.hms.maps.SupportMapFragment"&ndash;&gt;
+&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;
+&lt;!&ndash;        android:layout_height="match_parent"&ndash;&gt;
+        tools:context=".OutdoorFragment" />
+
+<com.huawei.hms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mapView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    map:cameraTargetLat="51"
+    map:cameraTargetLng="10"
+    map:cameraZoom="8.5"
+    map:mapType="normal"
+    map:uiCompass="true"
+    map:uiZoomControls="true" />
+&lt;!&ndash;</LinearLayout>&ndash;&gt;
+
+</fragment>-->
