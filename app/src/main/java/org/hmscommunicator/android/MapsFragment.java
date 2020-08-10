@@ -2,8 +2,14 @@ package org.hmscommunicator.android;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +21,6 @@ import com.huawei.hms.maps.HuaweiMap;
 import com.huawei.hms.maps.OnMapReadyCallback;
 import com.huawei.hms.maps.SupportMapFragment;
 import com.huawei.hms.maps.model.LatLng;
-import com.huawei.hms.maps.model.MarkerOptions;
 
 public class MapsFragment extends Fragment {
 
@@ -34,12 +39,27 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(HuaweiMap huaweiMap) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Log.i(TAG, "sdk >= 23 M");
+                Activity activity;
+                activity = getActivity();
+                if (ContextCompat.checkSelfPermission(activity,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        || ActivityCompat.checkSelfPermission(activity,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    String[] strings =
+                            {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+                    ActivityCompat.requestPermissions(activity, strings, 1);
+                }
+            }
 //            LatLng sydney = new LatLng(-34, 151);
 //            huaweiMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //            huaweiMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
             Log.d(TAG, "onMapReady: ");
 //            hMap = map;
+            huaweiMap.setMyLocationEnabled(true);
             huaweiMap.getUiSettings().setMyLocationButtonEnabled(true);
+
             huaweiMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.804897,-122.477195), 10));
         }
     };
