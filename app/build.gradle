@@ -68,6 +68,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
@@ -84,7 +85,6 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
-//    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    implementation 'com.huawei.hms:maps:4.0.1.302'
-
+    implementation 'com.huawei.hms:maps:5.0.1.300'
+    implementation 'com.huawei.hms:location:5.0.0.301'
 }
