@@ -56,7 +56,7 @@ class DeepLinkFragment : Fragment() {
             args.putString("myarg", editArgs.getText().toString())
 
             val deeplink = findNavController().createDeepLink()
-                    .setDestination(R.id.deeplink_dest)
+                    .setDestination(R.id.select_lang_dest)
                     .setArguments(args)
                     .createPendingIntent()
 
@@ -68,7 +68,7 @@ class DeepLinkFragment : Fragment() {
             }
 
             val builder = NotificationCompat.Builder(
-                    context!!, "deeplink")
+                    requireContext(), "deeplink")
                     .setContentTitle("Navigation")
                     .setContentText("Deep link to Android")
                     .setSmallIcon(R.drawable.ic_android)

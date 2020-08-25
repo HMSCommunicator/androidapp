@@ -25,6 +25,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -37,10 +38,14 @@ import com.google.android.material.navigation.NavigationView
  */
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration : AppBarConfiguration
+    private var fManager: FragmentManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.navigation_activity)
+
+        fManager = supportFragmentManager
+        val fragmentTransaction = fManager!!.beginTransaction()
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -57,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         // You should also remove the old appBarConfiguration setup above
         val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
         appBarConfiguration = AppBarConfiguration(
-                setOf(R.id.maps_dest, R.id.chat_dest, R.id.deeplink_dest),
+                setOf(R.id.maps_dest, R.id.chat_dest, R.id.select_lang_dest),
                 drawerLayout)
         // TODO END STEP 9.5
 
