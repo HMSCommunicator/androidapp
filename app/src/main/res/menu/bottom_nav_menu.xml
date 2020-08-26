@@ -18,7 +18,7 @@
         android:title="@string/outdoor" />
     <item
         android:id="@id/chat_dest"
-        android:icon="@drawable/ic_android"
+        android:icon="@drawable/ic_chat"
         android:title="@string/chat" />
     <item
         android:id="@id/select_lang_dest"
