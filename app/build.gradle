@@ -33,9 +33,9 @@ android {
     signingConfigs {
         release {
             storeFile file('hmsdemo.jks')
-            keyAlias 'xxxxxxxx'
-            keyPassword 'xxxxxxxx'
-            storePassword 'xxxxxxxx'
+            keyAlias 'hmsdemo'
+            keyPassword 'hmsdemo'
+            storePassword 'hmsdemo'
             v1SigningEnabled true
             v2SigningEnabled true
         }
