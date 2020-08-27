@@ -91,14 +91,22 @@
     <!-- TODO END STEP 4 -->
 
     <fragment
-        android:id="@+id/deeplink_dest"
-        android:name="org.hmscommunicator.android.DeepLinkFragment"
+        android:id="@+id/select_lang_dest"
+        android:name="org.hmscommunicator.android.aitools.LangSelectFragment"
         android:label="@string/deeplink"
-        tools:layout="@layout/deeplink_fragment">
+        tools:layout="@layout/fragment_language_select">
 
         <argument
             android:name="myarg"
             android:defaultValue="Android!"/>
+        <action
+            android:id="@+id/action_select_lang_dest_to_remoteTranslateFragment"
+            app:destination="@id/remoate_trans_dest"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_select_lang_dest_to_asrAnalyseFragment"
+            app:destination="@id/asr_dest" />
         <!-- TODO STEP 11.1 - Add a deep link to www.example.com/{myarg}/ -->
 
         <!--<deepLink app:uri="www.example.com/{myarg}" />-->
@@ -109,6 +117,40 @@
         android:id="@+id/maps_dest"
         android:name="org.hmscommunicator.android.MapsFragment"
         android:label="@string/outdoor"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_maps_dest_to_outdoor_dest"
+            app:destination="@id/outdoor_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/remoate_trans_dest"
+        android:name="org.hmscommunicator.android.aitools.RemoteTranslateFragment"
+        android:label="fragment_remote_translate"
+        tools:layout="@layout/fragment_remote_translate" >
+        <action
+            android:id="@+id/action_remoate_trans_dest_to_capture_photo_dest"
+            app:destination="@id/capture_photo_dest" />
+        <action
+            android:id="@+id/action_remoate_trans_dest_to_select_lang_dest"
+            app:destination="@id/select_lang_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/capture_photo_dest"
+        android:name="org.hmscommunicator.android.aitools.camera.CapturePhotoFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_capture_photo_dest_to_remoate_trans_dest"
+            app:destination="@id/remoate_trans_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/asr_dest"
+        android:name="org.hmscommunicator.android.aitools.AsrAnalyseFragment"
+        android:label="fragment_asr_analyse"
+        tools:layout="@layout/fragment_asr_analyse" >
+        <action
+            android:id="@+id/action_asr_dest_to_select_lang_dest"
+            app:destination="@id/select_lang_dest" />
+    </fragment>
 
 </navigation>

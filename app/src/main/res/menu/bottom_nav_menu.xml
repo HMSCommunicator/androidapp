@@ -21,7 +21,7 @@
         android:icon="@drawable/ic_chat"
         android:title="@string/chat" />
     <item
-        android:id="@id/deeplink_dest"
+        android:id="@id/select_lang_dest"
         android:icon="@drawable/ic_android"
         android:title="@string/deeplink" />
 </menu>

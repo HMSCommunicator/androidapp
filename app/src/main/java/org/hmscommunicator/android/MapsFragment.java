@@ -29,7 +29,8 @@ import com.huawei.hms.maps.HuaweiMap;
 import com.huawei.hms.maps.OnMapReadyCallback;
 import com.huawei.hms.maps.SupportMapFragment;
 import com.huawei.hms.maps.model.LatLng;
-import com.huawei.hms.maps.model.MarkerOptions;
+
+import org.hmscommunicator.android.R;
 
 public class MapsFragment extends Fragment {
 
