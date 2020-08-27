@@ -45,7 +45,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="100dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="100dp"
             android:text="@string/entoch" />
 
@@ -58,9 +58,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="100dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:onClick="tts"
             android:text="@string/play_audio" />
 
