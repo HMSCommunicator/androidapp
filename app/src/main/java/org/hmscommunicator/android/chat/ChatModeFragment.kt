@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.hmscommunicator.android
+package org.hmscommunicator.android.chat
 
 import android.os.Bundle
 import android.view.*
@@ -23,20 +23,21 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import org.hmscommunicator.android.R
 
-//import androidx.navigation.Navigation.findNavController
+import androidx.navigation.Navigation.findNavController
 
 /**
  * Fragment used to show how to navigate to another destination
  */
-class ChatFragment : Fragment() {
+class ChatModeFragment : Fragment() {
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_chat_mode, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,15 +59,19 @@ class ChatFragment : Fragment() {
                 popExit = R.anim.slide_out_right
             }
         }
-        view.findViewById<Button>(R.id.navigate_destination_button)?.setOnClickListener {
-            findNavController().navigate(R.id.flow_step_one_dest, null, options)
+        view.findViewById<Button>(R.id.mode_username_button)?.setOnClickListener {
+            findNavController().navigate(R.id.username_dest, null, options)
+        }
+
+        view.findViewById<Button>(R.id.mode_chatroom_button)?.setOnClickListener {
+            findNavController().navigate(R.id.chatroom_dest, null, options)
         }
         //TODO END STEP 6
 
         //TODO STEP 7.2 - Update the OnClickListener to navigate using an action
-        view.findViewById<Button>(R.id.navigate_action_button)?.setOnClickListener(
-                Navigation.createNavigateOnClickListener(R.id.next_action, null)
-        )
+//        view.findViewById<Button>(R.id.mode_chatroom_button)?.setOnClickListener(
+//                Navigation.createNavigateOnClickListener(R.id.next_action, null)
+//        )
         //TODO END STEP 7.2
     }
 

@@ -18,7 +18,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatFragment">
+    tools:context=".chat.ChatModeFragment">
 
     <TextView
         android:id="@+id/text"
@@ -29,7 +29,7 @@
         android:text="@string/chat"
         android:textAlignment="center"
         android:textSize="52sp"
-        app:layout_constraintBottom_toTopOf="@+id/navigate_destination_button"
+        app:layout_constraintBottom_toTopOf="@+id/mode_username_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,15 +37,15 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/navigate_destination_button"
+        android:id="@+id/mode_username_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:text="@string/navigate_destination_button"
-        app:layout_constraintBottom_toTopOf="@+id/navigate_action_button"
+        android:text="@string/mode_username_button"
+        app:layout_constraintBottom_toTopOf="@+id/mode_chatroom_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,16 +53,32 @@
         app:layout_constraintVertical_bias="0.594" />
 
     <Button
-        android:id="@+id/navigate_action_button"
+        android:id="@+id/mode_chatroom_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:text="@string/navigate_action_button"
+        android:layout_marginTop="8dp"
+        android:text="@string/mode_chatroom_button"
+        app:layout_constraintBottom_toTopOf="@+id/mode_search_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mode_username_button" />
+
+
+    <Button
+        android:id="@+id/mode_search_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/mode_search_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/navigate_destination_button" />
+        app:layout_constraintTop_toBottomOf="@+id/mode_chatroom_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
