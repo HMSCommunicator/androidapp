@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
-import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
+import com.huawei.hms.ml.common.base.SmartLog;
 import org.hmscommunicator.android.R;
 import org.hmscommunicator.android.aitools.camera.CameraConfiguration;
 import org.hmscommunicator.android.aitools.camera.LensEngine;

@@ -1,14 +1,17 @@
 package org.hmscommunicator.android.aitools;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,8 +25,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
+import com.huawei.hms.ml.common.base.SmartLog;
 import com.huawei.hms.mlplugin.asr.MLAsrCaptureActivity;
 import com.huawei.hms.mlplugin.asr.MLAsrCaptureConstants;
+import com.huawei.hms.mlsdk.asr.MLAsrConstants;
+import com.huawei.hms.mlsdk.common.MLApplication;
 import com.huawei.hms.mlsdk.translate.MLTranslatorFactory;
 import com.huawei.hms.mlsdk.translate.cloud.MLRemoteTranslateSetting;
 import com.huawei.hms.mlsdk.translate.cloud.MLRemoteTranslator;
@@ -37,6 +43,7 @@ import com.huawei.hms.mlsdk.tts.MLTtsWarn;
 
 //import com.huawei.mlkit.example.R;
 import org.hmscommunicator.android.R;
+import org.hmscommunicator.android.aitools.util.Constant;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,6 +63,7 @@ public class AsrAnalyseFragment extends Fragment {
     private String targetLangCode;
     private String sourceText;
     private String result;
+    private AudioManager audioManager;
 
     MLTtsEngine mlTtsEngine;
     MLTtsConfig mlConfigs;
@@ -120,29 +128,42 @@ public class AsrAnalyseFragment extends Fragment {
         }else{
             Log.d(TAG, "permission already granted");
         }
-        sourceLangCode = "en";
-        targetLangCode = "zh";
+        try {
+            this.sourceLangCode = getArguments().getString(Constant.SOURCE_VALUE);
+            this.targetLangCode = getArguments().getString(Constant.DEST_VALUE);
+        } catch (RuntimeException e) {
+            SmartLog.e(AsrAnalyseFragment.TAG, "Get args value failed:" + e.getMessage());
+        }
         // Method 1: Use the default parameter settings to create a TTS engine.
         // In the default settings, the source language is Chinese, the Chinese female voice is used,
         // the voice speed is 1.0 (1x), and the volume is 1.0 (1x).
         // MLTtsConfig mlConfigs = new MLTtsConfig();
         // Method 2: Use customized parameter settings to create a TTS engine.
         mlConfigs = new MLTtsConfig()
-                // Set the text converted from speech to English.
-                // MLTtsConstants.TTS_EN_US: converts text to English.
-                // MLTtsConstants.TTS_ZH_HANS: converts text to Chinese.
-                .setLanguage(MLTtsConstants.TTS_ZH_HANS)
-                // Set the English timbre.
-                // MLTtsConstants.TTS_SPEAKER_FEMALE_ZH: Chinese female voice.
-                // MLTtsConstants.TTS_SPEAKER_MALE_ZH: Chinese male voice.
-                .setPerson(MLTtsConstants.TTS_SPEAKER_FEMALE_ZH)
                 // Set the speech speed. Range: 0.2–1.8. 1.0 indicates 1x speed.
                 .setSpeed(1.0f)
                 // Set the volume. Range: 0.2–1.8. 1.0 indicates 1x volume.
                 .setVolume(1.0f);
-        mlTtsEngine = new MLTtsEngine(mlConfigs);
-        // Pass the TTS callback to the TTS engine.
-        mlTtsEngine.setTtsCallback(callback);
+        //{"ZH", "EN"};
+        if (targetLangCode == "ZH") {
+            mlConfigs.setLanguage(MLTtsConstants.TTS_ZH_HANS)
+                    .setPerson(MLTtsConstants.TTS_SPEAKER_FEMALE_ZH);
+        }else if (targetLangCode == "EN") {
+            mlConfigs.setLanguage(MLTtsConstants.TTS_EN_US)
+                    .setPerson(MLTtsConstants.TTS_SPEAKER_FEMALE_EN);
+        }
+//        else if (targetLangCode == "FR") {
+//            mlConfigs.setLanguage(MLTtsConstants.TTS_LAN_FR_FR)
+//                    .setPerson(MLTtsConstants.TTS_SPEAKER_FEMALE_FR);
+//        }else if (targetLangCode == "ES") {
+//            mlConfigs.setLanguage(MLTtsConstants.TTS_LAN_ES_ES)
+//                    .setPerson(MLTtsConstants.TTS_SPEAKER_FEMALE_ES);
+//        }
+
+        MLApplication.getInstance().setApiKey("CgB6e3x9B3TFxMBwzp5Fw9sBMiFvLeGxNWHQvlLNvlmqNhx7IOVxSrxsFHNMJkzjVuc15rSVqoz8Dq0MgsmXtvxV");
+//        mlTtsEngine = new MLTtsEngine(mlConfigs);
+//        // Pass the TTS callback to the TTS engine.
+//        mlTtsEngine.setTtsCallback(callback);
 
     }
 
@@ -152,8 +173,20 @@ public class AsrAnalyseFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_asr_analyse, container, false);
         this.mTextView = v.findViewById(R.id.bigTitleView);
-        v.findViewById(R.id.voice_input).setOnClickListener(this::onClick);
-        v.findViewById(R.id.tts).setOnClickListener(this::onClick);
+        v.findViewById(R.id.voice_input).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                asr(v);
+            }
+        });
+        v.findViewById(R.id.tts).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                tts(v);
+            }
+        });;
 //        v.findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -199,6 +232,8 @@ public class AsrAnalyseFragment extends Fragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.voice_input:
+                audioManager =
+                        (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
                 asr(v);
                 break;
             case R.id.tts:
@@ -245,9 +280,11 @@ public class AsrAnalyseFragment extends Fragment {
                                 // Processing logic for success.
                                 result = text;
                                 displayResult(sourceText + "\n" + text);
-                                mlTtsEngine = new MLTtsEngine(mlConfigs);
-                                mlTtsEngine.setTtsCallback(callback);
-                                String id = mlTtsEngine.speak(result, MLTtsEngine.QUEUE_APPEND);
+                                if (targetLangCode == "ZH" || targetLangCode == "EN") {
+                                    mlTtsEngine = new MLTtsEngine(mlConfigs);
+                                    mlTtsEngine.setTtsCallback(callback);
+                                    String id = mlTtsEngine.speak(result, MLTtsEngine.QUEUE_APPEND);
+                                }
                                 //mTextView.setText(text);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -289,39 +326,64 @@ public class AsrAnalyseFragment extends Fragment {
         // alliance(https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/ml-add-agc),
         // replacing the sample-agconnect-services.json in the project.
         // Use Intent for recognition settings.
-        if (sourceLangCode == "en") {
+        //view.playSoundEffect(SoundEffectConstants.CLICK);
+//        if (sourceLangCode == "en") {
+//            Intent intent = new Intent(getActivity(), MLAsrCaptureActivity.class)
+//                    // Set the language that can be recognized to English. If this parameter is not set,
+//                    // English is recognized by default. Example: "zh": Chinese or "en-US": English
+//                    .putExtra(MLAsrCaptureConstants.LANGUAGE, "en-US")
+//                    // Set whether to display text on the speech pickup UI. MLAsrCaptureConstants.FEATURE_ALLINONE: no;
+//                    // MLAsrCaptureConstants.FEATURE_WORDFLUX: yes.
+//                    .putExtra(MLAsrCaptureConstants.FEATURE, MLAsrCaptureConstants.FEATURE_WORDFLUX);
+//            // ML_ASR_CAPTURE_CODE: request code between the current activity and speech pickup UI activity.
+//            // You can use this code to obtain the processing result of the speech pickup UI.
+//            startActivityForResult(intent, ML_ASR_CAPTURE_CODE);
+//        }else if (sourceLangCode == "zh"){
+//            Intent intent = new Intent(getActivity(), MLAsrCaptureActivity.class)
+//                    // Set the language that can be recognized to English. If this parameter is not set,
+//                    // English is recognized by default. Example: "zh": Chinese or "en-US": English
+//                    .putExtra(MLAsrCaptureConstants.LANGUAGE, "zh")
+//                    // Set whether to display text on the speech pickup UI. MLAsrCaptureConstants.FEATURE_ALLINONE: no;
+//                    // MLAsrCaptureConstants.FEATURE_WORDFLUX: yes.
+//                    .putExtra(MLAsrCaptureConstants.FEATURE, MLAsrCaptureConstants.FEATURE_WORDFLUX);
+//            // ML_ASR_CAPTURE_CODE: request code between the current activity and speech pickup UI activity.
+//            // You can use this code to obtain the processing result of the speech pickup UI.
+//            startActivityForResult(intent, ML_ASR_CAPTURE_CODE);
+//        }
+
             Intent intent = new Intent(getActivity(), MLAsrCaptureActivity.class)
-                    // Set the language that can be recognized to English. If this parameter is not set,
-                    // English is recognized by default. Example: "zh": Chinese or "en-US": English
-                    .putExtra(MLAsrCaptureConstants.LANGUAGE, "en-US")
                     // Set whether to display text on the speech pickup UI. MLAsrCaptureConstants.FEATURE_ALLINONE: no;
                     // MLAsrCaptureConstants.FEATURE_WORDFLUX: yes.
                     .putExtra(MLAsrCaptureConstants.FEATURE, MLAsrCaptureConstants.FEATURE_WORDFLUX);
             // ML_ASR_CAPTURE_CODE: request code between the current activity and speech pickup UI activity.
             // You can use this code to obtain the processing result of the speech pickup UI.
+        //{"ZH", "EN", "FR", "ES", "DE"};
+            if (sourceLangCode == "EN") {
+                intent.putExtra(MLAsrCaptureConstants.LANGUAGE, MLAsrConstants.LAN_EN_US);
+            }else if (sourceLangCode == "ZH") {
+                intent.putExtra(MLAsrCaptureConstants.LANGUAGE, MLAsrConstants.LAN_ZH_CN);
+            }
+//            else if (sourceLangCode == "FR") {
+//                intent.putExtra(MLAsrCaptureConstants.LANGUAGE, MLAsrConstants.LAN_FR_FR);
+//            }else if (sourceLangCode == "ES") {
+//                intent.putExtra(MLAsrCaptureConstants.LANGUAGE, MLAsrConstants.LAN_ES_ES);
+//            }else if (sourceLangCode == "DE") {
+//                intent.putExtra(MLAsrCaptureConstants.LANGUAGE, MLAsrConstants.LAN_DE_DE);
+//            }
+
             startActivityForResult(intent, ML_ASR_CAPTURE_CODE);
-        }else if (sourceLangCode == "zh"){
-            Intent intent = new Intent(getActivity(), MLAsrCaptureActivity.class)
-                    // Set the language that can be recognized to English. If this parameter is not set,
-                    // English is recognized by default. Example: "zh": Chinese or "en-US": English
-                    .putExtra(MLAsrCaptureConstants.LANGUAGE, "zh")
-                    // Set whether to display text on the speech pickup UI. MLAsrCaptureConstants.FEATURE_ALLINONE: no;
-                    // MLAsrCaptureConstants.FEATURE_WORDFLUX: yes.
-                    .putExtra(MLAsrCaptureConstants.FEATURE, MLAsrCaptureConstants.FEATURE_WORDFLUX);
-            // ML_ASR_CAPTURE_CODE: request code between the current activity and speech pickup UI activity.
-            // You can use this code to obtain the processing result of the speech pickup UI.
-            startActivityForResult(intent, ML_ASR_CAPTURE_CODE);
-        }
     }
 
     public void tts(View view) {
-        if (mTextView.getContext() == null) {
+        if (mTextView.getContext().toString() == null) {
             Toast.makeText(getActivity().getApplicationContext(), "Please say something before play it!", Toast.LENGTH_SHORT).show();
-        }else {
+        }else if (targetLangCode == "ZH" || targetLangCode == "CN"){
             mlTtsEngine = new MLTtsEngine(mlConfigs);
             mlTtsEngine.setTtsCallback(callback);
             String id = mlTtsEngine.speak(result, MLTtsEngine.QUEUE_APPEND);
             //displayResult("TaskID: " + id + " submit.");
+        }else {
+            Toast.makeText(getActivity().getApplicationContext(), "Sorry, we can't read this language currently.", Toast.LENGTH_SHORT).show();
         }
     }
 

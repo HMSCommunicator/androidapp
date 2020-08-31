@@ -33,7 +33,8 @@ import androidx.navigation.Navigation;
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
-import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
+import com.huawei.hms.ml.common.base.SmartLog;
+import com.huawei.hms.mlsdk.common.MLApplication;
 import com.huawei.hms.mlsdk.translate.MLTranslatorFactory;
 import com.huawei.hms.mlsdk.translate.cloud.MLRemoteTranslateSetting;
 import com.huawei.hms.mlsdk.translate.cloud.MLRemoteTranslator;
@@ -49,12 +50,12 @@ import org.hmscommunicator.android.R;
 
 public class LangSelectFragment extends Fragment {
     private static final String TAG = "MainActivity";
-    private static final String[] SOURCE_LANGUAGE_CODE = new String[]{"Auto", "ZH", "EN", "FR", "ES", "AR", "TH", "TR",};
-    private static final String[] DEST_LANGUAGE_CODE = new String[]{"ZH", "EN", "FR", "ES", "AR", "TH", "TR"};
-    private static final List<String> SP_SOURCE_LIST = new ArrayList<>(Arrays.asList("自动检测", "中文", "英文", "法语", "西班牙语", "阿拉伯语", "泰语", "土耳其语"));
-    private static final List<String> SP_SOURCE_LIST_EN = new ArrayList<>(Arrays.asList("Auto", "Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish"));
-    private static final List<String> SP_DEST_LIST = new ArrayList<>(Arrays.asList("中文", "英文", "法语", "西班牙语", "阿拉伯语", "泰语", "土耳其语"));
-    private static final List<String> SP_DEST_LIST_EN = new ArrayList<>(Arrays.asList("Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish"));
+    private static final String[] SOURCE_LANGUAGE_CODE = new String[]{"Auto", "ZH", "EN", "FR", "ES", "AR", "TH", "TR", "DE", "IT"};
+    private static final String[] DEST_LANGUAGE_CODE = new String[]{"ZH", "EN", "FR", "ES", "AR", "TH", "TR", "DE", "IT"};
+    private static final List<String> SP_SOURCE_LIST = new ArrayList<>(Arrays.asList("自动检测", "中文", "英文", "法语", "西班牙语", "阿拉伯语", "泰语", "土耳其语", "德语", "意大利语"));
+    private static final List<String> SP_SOURCE_LIST_EN = new ArrayList<>(Arrays.asList("Auto", "Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish", "German", "Italian"));
+    private static final List<String> SP_DEST_LIST = new ArrayList<>(Arrays.asList("中文", "英文", "法语", "西班牙语", "阿拉伯语", "泰语", "土耳其语", "德语", "意大利语"));
+    private static final List<String> SP_DEST_LIST_EN = new ArrayList<>(Arrays.asList("Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish", "German", "Italian"));
     private static final List<String> CODE_LIST = new ArrayList<>(Arrays.asList("ar", "de", "en", "es", "fr", "it", "ja", "pt", "ru", "th", "tr", "zh", "ro"));
     private static final List<String> LANGUAGE_LIST= new ArrayList<>(Arrays.asList("Arabic", "German", "English", "Spanish", "French", "Italian",
             "Japanese", "Portuguese", "Russian", "Thai", "Turkish", "Chinese", "Romanian"));
@@ -316,6 +317,7 @@ public class LangSelectFragment extends Fragment {
     }
 
     private void createRemoteTranslator() {
+        MLApplication.getInstance().setApiKey("CgB6e3x9B3TFxMBwzp5Fw9sBMiFvLeGxNWHQvlLNvlmqNhx7IOVxSrxsFHNMJkzjVuc15rSVqoz8Dq0MgsmXtvxV");
         MLRemoteTranslateSetting.Factory factory = new MLRemoteTranslateSetting
                 .Factory()
                 // Set the target language code. The ISO 639-1 standard is used.
@@ -377,9 +379,9 @@ public class LangSelectFragment extends Fragment {
     }
 
     public void asrTranslator(View view) {
-        if (this.srcLanguage != "EN" || this.dstLanguage != "ZH") {
+        if (this.srcLanguage != "EN" && this.srcLanguage != "ZH") {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-            alertDialogBuilder.setMessage("Sorry, we only support English to Chinese speech translation now. Please reset your choice. Thank you!");
+            alertDialogBuilder.setMessage("Sorry, we only support English and Chinese as source language now. Please reset your choice. Thank you!");
             alertDialogBuilder.setPositiveButton("OK",
                     new DialogInterface.OnClickListener() {
                         @Override
@@ -397,7 +399,10 @@ public class LangSelectFragment extends Fragment {
 //            fragmentTransaction.hide(currentFragment);
 //            fragmentTransaction.show(asrAnalyseFragment);
 //            fragmentTransaction.commit();
-            Navigation.findNavController(view).navigate(R.id.action_select_lang_dest_to_asrAnalyseFragment);
+            Bundle args = new Bundle();
+            args.putString(Constant.SOURCE_VALUE, srcLanguage);
+            args.putString(Constant.DEST_VALUE, dstLanguage);
+            Navigation.findNavController(view).navigate(R.id.action_select_lang_dest_to_asrAnalyseFragment, args);
         }
     }
 

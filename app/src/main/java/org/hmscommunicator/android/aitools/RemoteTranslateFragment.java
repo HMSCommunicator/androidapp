@@ -32,8 +32,9 @@ import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
 import com.huawei.hms.mlsdk.MLAnalyzerFactory;
+import com.huawei.hms.mlsdk.common.MLApplication;
 import com.huawei.hms.mlsdk.common.MLFrame;
-import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
+import com.huawei.hms.ml.common.base.SmartLog;
 import com.huawei.hms.mlsdk.text.MLRemoteTextSetting;
 import com.huawei.hms.mlsdk.text.MLText;
 import com.huawei.hms.mlsdk.text.MLTextAnalyzer;
@@ -334,6 +335,7 @@ public class RemoteTranslateFragment extends Fragment {
     }
 
     private void createRemoteTextAnalyzer() {
+        MLApplication.getInstance().setApiKey("CgB6e3x9B3TFxMBwzp5Fw9sBMiFvLeGxNWHQvlLNvlmqNhx7IOVxSrxsFHNMJkzjVuc15rSVqoz8Dq0MgsmXtvxV");
         MLRemoteTextSetting setting = (new MLRemoteTextSetting.Factory())
                 .setTextDensityScene(MLRemoteTextSetting.OCR_LOOSE_SCENE)
                 .create();
