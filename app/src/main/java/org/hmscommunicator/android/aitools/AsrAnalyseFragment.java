@@ -377,7 +377,7 @@ public class AsrAnalyseFragment extends Fragment {
     public void tts(View view) {
         if (mTextView.getContext().toString() == null) {
             Toast.makeText(getActivity().getApplicationContext(), "Please say something before play it!", Toast.LENGTH_SHORT).show();
-        }else if (targetLangCode == "ZH" || targetLangCode == "CN"){
+        }else if (targetLangCode == "ZH" || targetLangCode == "EN"){
             mlTtsEngine = new MLTtsEngine(mlConfigs);
             mlTtsEngine.setTtsCallback(callback);
             String id = mlTtsEngine.speak(result, MLTtsEngine.QUEUE_APPEND);
