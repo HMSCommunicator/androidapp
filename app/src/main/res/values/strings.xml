@@ -32,7 +32,6 @@
     <string name="next_step_button">Navigate next step</string>
     <string name="finish_button">Finish Flow</string>
     <string name="send_deep_link_notification_button">Send deep link notification</string>
-    <!--    <string name="chat">Chat</string>-->
     <string name="subject">Translate the words in your photo</string>
     <string name="take_photo">take photo</string>
     <string name="select_photo">Photo Translate</string>
