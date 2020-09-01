@@ -28,59 +28,76 @@
 
     <fragment
         android:id="@+id/chat_dest"
-        android:name="org.hmscommunicator.android.ChatFragment"
+        android:name="org.hmscommunicator.android.chat.ChatModeFragment"
         android:label="@string/chat"
-        tools:layout="@layout/home_fragment">
+        tools:layout="@layout/fragment_chat_mode">
 
-        <!-- TODO STEP 7.1 - Add action with transitions -->
-<!--        <action-->
-<!--            android:id="@+id/next_action"-->
-<!--            app:destination="@+id/flow_step_one_dest"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
+        <argument
+            android:name="myarg"
+            android:defaultValue="Android!"/>
         <action
-            android:id="@+id/next_action"
-            app:destination="@id/flow_step_one_dest"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <!-- TODO END STEP 7.1 -->
-
+            android:id="@+id/action_chat_dest_to_username_dest"
+            app:destination="@id/username_dest"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_chat_dest_to_chatroom_dest"
+            app:destination="@id/chatroom_dest"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
-        android:id="@+id/flow_step_one_dest"
-        android:name="org.hmscommunicator.android.FlowStepFragment"
-        tools:layout="@layout/flow_step_one_fragment">
+        android:id="@+id/username_dest"
+        android:name="org.hmscommunicator.android.chat.UsernameFragment"
+        tools:layout="@layout/username_fragment">
         <argument
             android:name="flowStepNumber"
             app:argType="integer"
             android:defaultValue="1"/>
-
-        <action
-            android:id="@+id/next_action"
-            app:destination="@+id/flow_step_two_dest">
-        </action>
     </fragment>
 
     <fragment
-        android:id="@+id/flow_step_two_dest"
-        android:name="org.hmscommunicator.android.FlowStepFragment"
-        tools:layout="@layout/flow_step_two_fragment">
-
+        android:id="@+id/chatroom_dest"
+        android:name="org.hmscommunicator.android.chat.ChatroomFragment"
+        tools:layout="@layout/chatroom_fragment">
         <argument
             android:name="flowStepNumber"
             app:argType="integer"
-            android:defaultValue="2"/>
-
-        <action
-            android:id="@+id/next_action"
-            app:popUpTo="@id/chat_dest">
-        </action>
+            android:defaultValue="1"/>
     </fragment>
+
+
+    <!--    <fragment-->
+<!--        android:id="@+id/flow_step_one_dest"-->
+<!--        android:name="org.hmscommunicator.android.FlowStepFragment"-->
+<!--        tools:layout="@layout/flow_step_one_fragment">-->
+<!--        <argument-->
+<!--            android:name="flowStepNumber"-->
+<!--            app:argType="integer"-->
+<!--            android:defaultValue="1"/>-->
+
+<!--        <action-->
+<!--            android:id="@+id/next_action"-->
+<!--            app:destination="@+id/flow_step_two_dest">-->
+<!--        </action>-->
+<!--    </fragment>-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/flow_step_two_dest"-->
+<!--        android:name="org.hmscommunicator.android.FlowStepFragment"-->
+<!--        tools:layout="@layout/flow_step_two_fragment">-->
+
+<!--        <argument-->
+<!--            android:name="flowStepNumber"-->
+<!--            app:argType="integer"-->
+<!--            android:defaultValue="2"/>-->
+
+<!--        <action-->
+<!--            android:id="@+id/next_action"-->
+<!--            app:popUpTo="@id/chat_dest">-->
+<!--        </action>-->
+<!--    </fragment>-->
 
     <!-- TODO STEP 4 Create a new navigation destination pointing to SettingsFragment -->
     <fragment
