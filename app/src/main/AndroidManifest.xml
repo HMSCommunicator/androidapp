@@ -21,7 +21,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    
+
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -41,9 +41,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:requestLegacyExternalStorage ="true">
 
-        <activity android:name="org.hmscommunicator.android.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,7 +58,7 @@
 
         </activity>
 
-        <receiver android:name="org.hmscommunicator.android.DeepLinkAppWidgetProvider">
+        <receiver android:name=".DeepLinkAppWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -66,7 +67,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/deep_link_appwidget_info" />
         </receiver>
-        
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="org.hmscommunicator.android.fileprovider"
