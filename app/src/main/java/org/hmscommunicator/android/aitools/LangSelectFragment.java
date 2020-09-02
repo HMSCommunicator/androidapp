@@ -50,12 +50,12 @@ import org.hmscommunicator.android.R;
 
 public class LangSelectFragment extends Fragment {
     private static final String TAG = "MainActivity";
-    private static final String[] SOURCE_LANGUAGE_CODE = new String[]{"Auto", "ZH", "EN", "FR", "ES", "AR", "TH", "TR", "DE", "IT"};
-    private static final String[] DEST_LANGUAGE_CODE = new String[]{"ZH", "EN", "FR", "ES", "AR", "TH", "TR", "DE", "IT"};
-    private static final List<String> SP_SOURCE_LIST = new ArrayList<>(Arrays.asList("自动检测", "中文", "英文", "法语", "西班牙语", "阿拉伯语", "泰语", "土耳其语", "德语", "意大利语"));
-    private static final List<String> SP_SOURCE_LIST_EN = new ArrayList<>(Arrays.asList("Auto", "Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish", "German", "Italian"));
-    private static final List<String> SP_DEST_LIST = new ArrayList<>(Arrays.asList("中文", "英文", "法语", "西班牙语", "阿拉伯语", "泰语", "土耳其语", "德语", "意大利语"));
-    private static final List<String> SP_DEST_LIST_EN = new ArrayList<>(Arrays.asList("Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish", "German", "Italian"));
+    private static final String[] SOURCE_LANGUAGE_CODE = new String[]{"Auto", "ZH", "EN", "FR", "ES", "AR", "TH", "TR", "DE", "IT", "JA", "PT", "RU"};
+    private static final String[] DEST_LANGUAGE_CODE = new String[]{"ZH", "EN", "FR", "ES", "AR", "TH", "TR", "DE", "IT", "JA", "PT", "RU"};
+    private static final List<String> SP_SOURCE_LIST = new ArrayList<>(Arrays.asList("自动检测", "中文", "英文", "法语", "西班牙语", "阿拉伯语", "泰语", "土耳其语", "德语", "意大利语", "日语", "葡萄牙语", "俄语"));
+    private static final List<String> SP_SOURCE_LIST_EN = new ArrayList<>(Arrays.asList("Auto", "Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish", "German", "Italian", "Japanese", "Portuguese", "Russian"));
+    private static final List<String> SP_DEST_LIST = new ArrayList<>(Arrays.asList("中文", "英文", "法语", "西班牙语", "阿拉伯语", "泰语", "土耳其语", "德语", "意大利语", "日语", "葡萄牙语", "俄语"));
+    private static final List<String> SP_DEST_LIST_EN = new ArrayList<>(Arrays.asList("Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish", "German", "Italian", "Japanese", "Portuguese", "Russian"));
     private static final List<String> CODE_LIST = new ArrayList<>(Arrays.asList("ar", "de", "en", "es", "fr", "it", "ja", "pt", "ru", "th", "tr", "zh", "ro"));
     private static final List<String> LANGUAGE_LIST= new ArrayList<>(Arrays.asList("Arabic", "German", "English", "Spanish", "French", "Italian",
             "Japanese", "Portuguese", "Russian", "Thai", "Turkish", "Chinese", "Romanian"));
