@@ -17,4 +17,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#ffffffff</color>
     <color name="colorBlue">#FF63B8FF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="control_background">#cc4285f4</color>
 </resources>

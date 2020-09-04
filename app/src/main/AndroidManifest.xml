@@ -35,6 +35,7 @@
         android:name="android.hardware.microphone"
         android:required="false" />
 
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -43,6 +44,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:requestLegacyExternalStorage ="true">
+        <activity
+            android:name="org.hmscommunicator.android.chat.CameraKitActivity"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2018 The Android Open Source Project
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -69,5 +68,33 @@
     <string name="chatroom_id">Enter 4-digit Chat Room ID:</string>
     <string name="create_room">Create a Room</string>
     <string name="join_room">Join a Room</string>
+    <string name="capture_image">capture Image</string>
+    <string name="stop_image">stop</string>
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="flashMode">FlashMode</string>
+    <string name="manualIso">manualIso</string>
+    <string name="manualExposure">manualExposure</string>
+    <string name="warning_str">CameraKit is not installed or not support this device.</string>
+    <string name="slender">Slender</string>
+    <string name="skinColor">SkinColor</string>
+    <string name="body">Body</string>
+    <string name="smooth">SmoothLevel</string>
+    <string name="record">StartRec</string>
+    <string name="pause">Pause</string>
+    <string name="zoom">Zoom</string>
+    <string name="stoprecord">StopRec</string>
+    <string name="aiMovie">aiMovie</string>
+    <string name="resume">Resume</string>
+    <string name="normal">Normal</string>
+    <string name="bokeh">Bokeh</string>
+    <string name="hdr">HDR</string>
+    <string name="supernight">Super Night</string>
+    <string name="video">Video</string>
+    <string name="portrait">Beauty Cam</string>
+    <string name="gallary">Gallary</string>
+    <string name="switchcam">switch</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

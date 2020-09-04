@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.hmscommunicator.android.chat.CameraKitFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <org.hmscommunicator.android.chat.AutoFitTextureView
+            android:id="@+id/texture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/flashSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:alpha="0.5"
+                android:background="@color/white"></Spinner>
+
+
+        </LinearLayout>
+
+
+        <SeekBar
+            android:id="@+id/zoomSeekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="5.0dp"
+            android:minHeight="5.0dp"
+            android:layout_above="@id/zoomTips"/>
+
+        <TextView
+            android:id="@+id/zoomTips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/controlPanel"/>
+
+        <FrameLayout
+            android:id="@+id/controlPanel"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentBottom="true"
+            android:background="#FC009688">
+
+            <HorizontalScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/mode_button_style"
+                        android:text="@string/normal" />
+
+                    <Button
+                        android:id="@+id/hdr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/mode_button_style"
+                        android:text="@string/hdr" />
+
+                    <Button
+                        android:id="@+id/supernight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mode_button_style"
+                        android:text="@string/supernight" />
+
+                    <Button
+                        android:id="@+id/bokeh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mode_button_style"
+                        android:text="@string/bokeh" />
+
+                    <Button
+                        android:id="@+id/portrait"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mode_button_style"
+                        android:text="@string/portrait" />
+
+                    <Button
+                        android:id="@+id/video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mode_button_style"
+                        android:text="@string/video" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <Button
+                android:id="@+id/gallary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:onClick="gallary"
+                android:text="@string/gallary" />
+
+            <Button
+                android:id="@+id/capture_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/button_color_selector"
+                android:enabled="false"
+                android:text="@string/capture_image" />
+
+            <Button
+                android:id="@+id/stopPicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="100dp"
+                android:backgroundTint="@color/button_color_selector"
+                android:text="@string/stop_image" />
+
+            <Button
+                android:id="@+id/switchCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="100dp"
+                android:backgroundTint="@color/button_color_selector"
+                android:text="@string/switchcam" />
+
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

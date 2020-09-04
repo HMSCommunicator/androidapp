@@ -55,6 +55,12 @@
             android:name="flowStepNumber"
             app:argType="integer"
             android:defaultValue="1"/>
+        <action
+            android:id="@+id/action_username_dest_self"
+            app:destination="@id/username_dest" />
+        <action
+            android:id="@+id/action_username_dest_to_cameraKit_dest"
+            app:destination="@id/cameraKit_dest" />
     </fragment>
 
     <fragment
@@ -65,6 +71,9 @@
             android:name="flowStepNumber"
             app:argType="integer"
             android:defaultValue="1"/>
+        <action
+            android:id="@+id/action_chatroom_dest_to_cameraKit_dest"
+            app:destination="@id/cameraKit_dest" />
     </fragment>
 
 
@@ -127,5 +136,53 @@
         android:name="org.hmscommunicator.android.MapsFragment"
         android:label="@string/outdoor"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/bokeh_dest"
+        android:name="org.hmscommunicator.android.chat.BokehFragment"
+        android:label="BokehFragment" />
+    <fragment
+        android:id="@+id/HDR_dest"
+        android:name="org.hmscommunicator.android.chat.HDRFragment"
+        android:label="HDRFragment" />
+    <fragment
+        android:id="@+id/normal_dest"
+        android:name="org.hmscommunicator.android.chat.NormalFragment"
+        android:label="NormalFragment" />
+    <fragment
+        android:id="@+id/portrait_dest"
+        android:name="org.hmscommunicator.android.chat.PortraitFragment"
+        android:label="PortraitFragment" />
+    <fragment
+        android:id="@+id/superNight_dest"
+        android:name="org.hmscommunicator.android.chat.SuperNightFragment"
+        android:label="SuperNightFragment" />
+    <fragment
+        android:id="@+id/video_dest"
+        android:name="org.hmscommunicator.android.chat.VideoFragment"
+        android:label="VideoFragment" />
+    <fragment
+        android:id="@+id/cameraKit_dest"
+        android:name="org.hmscommunicator.android.chat.CameraKitFragment"
+        android:label="fragment_camera_kit"
+        tools:layout="@layout/fragment_camera_kit" >
+        <action
+            android:id="@+id/action_cameraKit_dest_to_video_dest"
+            app:destination="@id/video_dest" />
+        <action
+            android:id="@+id/action_cameraKit_dest_to_portrait_dest"
+            app:destination="@id/portrait_dest" />
+        <action
+            android:id="@+id/action_cameraKit_dest_to_normal_dest"
+            app:destination="@id/normal_dest" />
+        <action
+            android:id="@+id/action_cameraKit_dest_to_HDR_dest"
+            app:destination="@id/HDR_dest" />
+        <action
+            android:id="@+id/action_cameraKit_dest_to_bokeh_dest"
+            app:destination="@id/bokeh_dest" />
+        <action
+            android:id="@+id/action_cameraKit_dest_to_superNight_dest"
+            app:destination="@id/superNight_dest" />
+    </fragment>
 
 </navigation>
