@@ -43,6 +43,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.SimpleArrayMap;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.huawei.hms.nearby.Nearby;
 import com.huawei.hms.nearby.StatusCode;
@@ -183,6 +184,8 @@ public class ChatroomFragment extends Fragment implements PermissionInterface, V
         receiveBtn.setEnabled(false);
         sendPictureBtn.setEnabled(false);
         cameraBtn.setEnabled(false);
+        
+        receiveBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.received_dest, null));
 
         return v;
     }
