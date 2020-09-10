@@ -51,20 +51,27 @@
         android:id="@+id/username_dest"
         android:name="org.hmscommunicator.android.chat.UsernameFragment"
         tools:layout="@layout/username_fragment">
+
         <argument
-            android:name="flowStepNumber"
-            app:argType="integer"
-            android:defaultValue="1"/>
+            android:name="myarg"
+            android:defaultValue="Android!"/>
+        <action
+            android:id="@+id/action_username_dest_to_received_dest"
+            app:destination="@id/received_dest"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
         android:id="@+id/chatroom_dest"
         android:name="org.hmscommunicator.android.chat.ChatroomFragment"
         tools:layout="@layout/chatroom_fragment">
-        <argument
-            android:name="flowStepNumber"
-            app:argType="integer"
-            android:defaultValue="1"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/received_dest"
+        android:name="org.hmscommunicator.android.chat.ReceivedPhotoFragment"
+        tools:layout="@layout/activity_received_photo">
     </fragment>
 
 
