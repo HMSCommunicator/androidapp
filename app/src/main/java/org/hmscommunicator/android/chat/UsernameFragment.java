@@ -175,6 +175,8 @@ public class UsernameFragment extends Fragment implements PermissionInterface, V
         receiveBtn.setEnabled(false);
         sendPictureBtn.setEnabled(false);
         cameraBtn.setEnabled(false);
+        
+        receiveBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.received_dest, null));
 
         return v;
     }
@@ -293,11 +295,6 @@ public class UsernameFragment extends Fragment implements PermissionInterface, V
             }
             case R.id.btn_picture: {
                 onSendFileButtonClicked();
-                break;
-            }
-            case R.id.btn_receivedPicture: {
-                Intent intent = new Intent(getActivity(), ReceivedPhotoFragment.class);
-                startActivity(intent);
                 break;
             }
             default: {
