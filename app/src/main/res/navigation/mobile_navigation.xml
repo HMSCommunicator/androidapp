@@ -66,6 +66,15 @@
         android:id="@+id/chatroom_dest"
         android:name="org.hmscommunicator.android.chat.ChatroomFragment"
         tools:layout="@layout/chatroom_fragment">
+
+        <argument
+            android:name="myarg"
+            android:defaultValue="Android!"/>
+        <action
+            android:id="@+id/action_chatroom_dest_to_received_dest"
+            app:destination="@id/received_dest"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
